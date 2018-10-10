@@ -23,9 +23,39 @@
     <link rel="alternative" href="/atom.xml" title="宇亓道观" type="application/atom+xml">
   
   
+    <link rel="icon" href="/img/head.jpg">
+  
   <link rel="stylesheet" href="/css/style.css">
   
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
   
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-85415703-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
 
   <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
   <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
@@ -114,7 +144,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/分治/" style="font-size: 20px;">分治</a> <a href="/tags/归并排序/" style="font-size: 20px;">归并排序</a> <a href="/tags/碎碎念/" style="font-size: 10px;">碎碎念</a>
+						<a href="/tags/分治/" style="font-size: 10px;">分治</a> <a href="/tags/字典树/" style="font-size: 10px;">字典树</a> <a href="/tags/归并排序/" style="font-size: 10px;">归并排序</a> <a href="/tags/碎碎念/" style="font-size: 10px;">碎碎念</a> <a href="/tags/计算机基础/" style="font-size: 10px;">计算机基础</a>
 					</div>
 				</section>
 				
@@ -176,6 +206,89 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-关于原码，反码与补码的一点个人理解" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/10/10/关于原码，反码与补码的一点个人理解/" class="article-date">
+  	<time datetime="2018-10-10T15:24:18.000Z" itemprop="datePublished">2018-10-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/10/关于原码，反码与补码的一点个人理解/">
+        关于原码，反码与补码的一点个人理解
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="以下只是关于补码的一些个人理解"><a href="#以下只是关于补码的一些个人理解" class="headerlink" title="以下只是关于补码的一些个人理解"></a>以下只是关于补码的一些个人理解</h1><h2 id="十进制与二进制"><a href="#十进制与二进制" class="headerlink" title="十进制与二进制"></a>十进制与二进制</h2><p>日常人们计数一般用的是十进制数，然而在计算机中只能存储二进制数据，所以需要把十进制数转换成二进制进而存储在计算机中。<br><br>如：十进制数43,转化成二进制就是 101011，再经过一些处理就能存储再计算机内存中了<br><br></p>
+<h2 id="无符号整数在内存中的存储"><a href="#无符号整数在内存中的存储" class="headerlink" title="无符号整数在内存中的存储"></a>无符号整数在内存中的存储</h2><ol>
+<li>将十进制数转化成2进制数，如43转化成101011</li>
+<li>在二进制数的左边补0，补至最高位。假设我们用一个8位的内存存储数据，43将转换成00101011</li>
+</ol>
+<p>注：若将十进制数转换成二进制数后超出了最高位，则超出部分会被遗弃。<br><br>&emsp;&emsp;如257会转换成100000001，遗弃超出部分后就变成00000001。<br><br>&emsp;&emsp;遗弃最高位就相当于对模数取模（自行百度模数的定义<br><br><br></p>
+<h2 id="有符号整数在内存中的存储"><a href="#有符号整数在内存中的存储" class="headerlink" title="有符号整数在内存中的存储"></a>有符号整数在内存中的存储</h2><ul>
+<li>有两种方法可以用来表示有符号整数，原码和补码，现在普遍采用的是补码表示法</li>
+</ul>
+<h3 id="原码"><a href="#原码" class="headerlink" title="原码"></a>原码</h3><p><br>保留最高位作为符号位，0代表正，1代表负，剩下所有位表示数值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(43)原 = 00101011</span><br><span class="line">(-43)原 = 10101011</span><br></pre></td></tr></table></figure>
+<h3 id="反码"><a href="#反码" class="headerlink" title="反码"></a>反码</h3><p><br>在介绍补码之前，先介绍一下反码，反码本身没什么意义，只是求补码的一种中间运算。<br><br>关于反码的定义其实是存在争议的，反码有两个定义：<br><br>第一种： 将原码的所有位全部取反</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(43)反 = 11010100</span><br><span class="line">(-43)反 = 01010100</span><br></pre></td></tr></table></figure>
+<p><br>第二种，正数和零的反码就是其原码，负数的补码是原码保留最高位，剩下位全部取反</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(43)反 = 00101011</span><br><span class="line">(-43)反 = 11010100</span><br></pre></td></tr></table></figure>
+<p><br>被普遍采用的定义是第二种，如果没特殊说明，接下来我们所说的反码都是指第二种</p>
+<h3 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h3><p><br>现代计算机以补码存储数据，一般计算出整数的补码然后存储在内存中<br><br>补码的计算方法：<br><br></p>
+<ol>
+<li>正数的补码等于其原码。</li>
+<li>负数的补码就是它的反码+1。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(43)补 = 00101011</span><br><span class="line">(-43)补 = 11010101</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机基础/">计算机基础</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/计算机基础/">计算机基础</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-洛谷P2580-于是他错误的点名开始了——字典树" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -224,7 +337,7 @@
       
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分治/">分治</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/归并排序/">归并排序</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/字典树/">字典树</a></li></ul>
 	</div>
 
       
