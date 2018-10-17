@@ -250,7 +250,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(43)原 = 00101011</span><br><span class="line">(-43)原 = 10101011</span><br></pre></td></tr></table></figure>
 <h3 id="反码"><a href="#反码" class="headerlink" title="反码"></a>反码</h3><p><br>在介绍补码之前，先介绍一下反码，反码本身没什么意义，只是求补码的一种中间运算。<br><br>关于反码的定义其实是存在争议的，反码有两个定义：<br><br>第一种： 将原码的所有位全部取反</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(43)反 = 11010100</span><br><span class="line">(-43)反 = 01010100</span><br></pre></td></tr></table></figure>
-<p><br>第二种，正数和零的反码就是其原码，负数的补码是原码保留最高位，剩下位全部取反</p>
+<p><br>第二种，正数和零的反码就是其原码，负数的反码是原码保留最高位，剩下位全部取反</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(43)反 = 00101011</span><br><span class="line">(-43)反 = 11010100</span><br></pre></td></tr></table></figure>
 <p><br>被普遍采用的定义是第二种，如果没特殊说明，接下来我们所说的反码都是指第二种</p>
 <h3 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h3><p><br>现代计算机以补码存储数据，一般计算出整数的补码然后存储在内存中<br><br>补码的计算方法：<br><br></p>
@@ -259,6 +259,7 @@
 <li>负数的补码就是它的反码+1。</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(43)补 = 00101011</span><br><span class="line">(-43)补 = 11010101</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
