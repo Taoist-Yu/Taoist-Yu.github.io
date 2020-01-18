@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="Taoist_Yu的个人博客" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    80X86汇编语言知识总结 |  宇亓道院
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/taiji.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-80X86汇编语言知识总结" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  80X86汇编语言知识总结
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2019/11/19/80X86汇编语言知识总结/" class="article-date">
+  <time datetime="2019-11-19T11:05:07.000Z" itemprop="datePublished">2019-11-19</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/计算机基础/">计算机基础</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.3k字</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">5分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h1 id="80X86汇编语言知识点总结"><a href="#80X86汇编语言知识点总结" class="headerlink" title="80X86汇编语言知识点总结"></a>80X86汇编语言知识点总结</h1><h2 id="80X86六大部件"><a href="#80X86六大部件" class="headerlink" title="80X86六大部件"></a>80X86六大部件</h2><ol>
+<li>总线接口部件</li>
+<li>执行部件</li>
+<li>指令预取部件</li>
+<li>指令译码部件</li>
+<li>分段部件</li>
+<li>分页部件</li>
+</ol>
+<h2 id="80X86的寄存器组（隶属于执行部件）"><a href="#80X86的寄存器组（隶属于执行部件）" class="headerlink" title="80X86的寄存器组（隶属于执行部件）"></a>80X86的寄存器组（隶属于执行部件）</h2><ol>
+<li>数据寄存器组</li>
+</ol>
+<ul>
+<li><p>AX<br>  累加器</p>
+</li>
+<li><p>BX<br>  基址寄存器</p>
+</li>
+<li><p>CX<br>  计数寄存器</p>
+</li>
+<li><p>DX<br>  数据寄存器</p>
+</li>
+</ul>
+<ol start="2">
+<li>指示器变址寄存器组</li>
+</ol>
+<ul>
+<li><p>SI<br>  源变址寄存器</p>
+</li>
+<li><p>DI<br>  目的变址寄存器</p>
+</li>
+<li><p>BP<br>  堆栈基址寄存器</p>
+</li>
+<li><p>SP<br>  堆栈指示器</p>
+</li>
+</ul>
+<h2 id="标志寄存器"><a href="#标志寄存器" class="headerlink" title="标志寄存器"></a>标志寄存器</h2><ol>
+<li><strong>条件标志位</strong></li>
+</ol>
+<ul>
+<li>符号标志SF  </li>
+<li>零标志ZF</li>
+<li>溢出标志OF</li>
+<li>进位标志CF</li>
+<li>辅助进位标志AF</li>
+<li>奇偶标志PF</li>
+</ul>
+<ol start="2">
+<li><strong>控制标志位</strong></li>
+</ol>
+<ul>
+<li>方向标志DF</li>
+<li>中断允许标志IF</li>
+<li>跟踪标志TF</li>
+</ul>
+<h2 id="寻址方式"><a href="#寻址方式" class="headerlink" title="寻址方式"></a>寻址方式</h2><ol>
+<li>寄存器寻址<br> 格式: R<br> 示例: AX</li>
+<li>寄存器间接寻址<br> 格式: [R]<br> 示例: AX</li>
+<li>变址寻址<br> 格式: [R*F+V],[R*F]+V,V[R*F]<br> 示例: [EBX*2+5]</li>
+<li>基址加变址寻址<br> 格式: [BR+IR*F+V],V[BR][IR*F],V[BR+IR*F]<br> 示例: 8[BX][SI]</li>
+<li>立即寻址<br> 格式: n<br> 示例: 12H</li>
+<li>直接寻址<br> 格式: [n]<br> 示例: [1000h]</li>
+</ol>
+<p>另注:  </p>
+<ol>
+<li>上述六种寻址方式可归为三大类，寄存器方式，存储器方式，立即方式。</li>
+<li>一条指令的源操作数和目的操作数不能同时为存储器方式表示。</li>
+</ol>
+<h2 id="汇编指令"><a href="#汇编指令" class="headerlink" title="汇编指令"></a>汇编指令</h2><ol>
+<li><strong>堆栈操作指令</strong></li>
+</ol>
+<ul>
+<li><p>PUSH OPS<br>  将立即数或寄存器，段寄存器，存储器中的一个字/双字压入堆栈中。</p>
+</li>
+<li><p>POP OPD<br>  将栈顶元素弹出送至某一寄存器，段寄存器（除CS外）或存储器中。</p>
+</li>
+<li><p>PUSHA<br>  将8个16位寄存器AX、CX、DX、BX、SP、BP、SI、DI顺序入栈保存。</p>
+</li>
+</ul>
+<ol start="2">
+<li><strong>标志寄存器操作指令</strong></li>
+</ol>
+<ul>
+<li>LEAF<br>  把标志寄存器低八位送入AH中</li>
+</ul>
+<ol start="3">
+<li><strong>数据传送指令</strong></li>
+</ol>
+<blockquote>
+<ol>
+<li>一般数据传送指令<blockquote>
+<ol>
+<li>传送指令  <blockquote>
+<ul>
+<li>MOV OPD, OPS  <blockquote>
+<p> 将OPS的内容送至OPD</p>
+</blockquote>
+</li>
+<li>MOVSX OPD, OPS  <blockquote>
+<p> 扩展OPS符号位至与OPD相同的数据类型后送至OPD  </p>
+</blockquote>
+</li>
+<li>MOVZX OPD, OPS  <blockquote>
+<p> OPS高位补0，扩展成与OPD相同的数据类型后送至OPD</p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+</li>
+<li>数据交换指令<blockquote>
+<ul>
+<li>XCHG OPD, OPS  <blockquote>
+<p> OPS与OPD内容交换</p>
+</blockquote>
+</li>
+<li>BSWAP OPD<blockquote>
+<p> 32位寄存器的第一个字节与第四个字节交换，第二个字节与第三个字节交换。</p>
+</blockquote>
+</li>
+<li>XADD OPD, OPS  <blockquote>
+<p> 先交换OPD和OPS，再将OPD和OPS的和送至OPD。</p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+</li>
+<li>查表转换指令<blockquote>
+<ul>
+<li>XLAT OPS 或XLAT  <blockquote>
+<p> 将以(BX)或(EBX)位首地址,(AL)为偏移地址的字节存储单元中的数据送入AL。具体使用(BX)还是(EBX)取决于16位段还是32位段。</p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+</li>
+<li>地址传送指令<blockquote>
+<ol>
+<li>传送偏移地址指令<blockquote>
+<ul>
+<li>LEA OPD, OPS<blockquote>
+<p> 按OPS提供的寻址方式计算偏移地址，将结果送入OPD中。</p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+</li>
+<li>传送偏移地址及数据段首址指令<blockquote>
+<ul>
+<li>LDS OPD, OPS<blockquote>
+<p> OPS送入OPD，OPS+2或OPS+4送入DS。<br> 其中OPD是通用寄存器，OPS是DD或DF存储器</p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+</li>
+<li>传送偏移地址及附加数据段指令<blockquote>
+<ul>
+<li>LES OPD, OPS<blockquote>
+<p> OPS送入OPD，OPS+2或OPS+4送入ES。<br> 其中OPD是通用寄存器，OPS是DD或DF存储器</p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+<ol start="4">
+<li><strong>算术运算指令</strong></li>
+</ol>
+<blockquote>
+<ol>
+<li>加运算指令<blockquote>
+<ul>
+<li>INC OPD</li>
+<li>ADD OPD, OPS</li>
+</ul>
+</blockquote>
+</li>
+<li>减运算指令<blockquote>
+<ul>
+<li>DEC OPD</li>
+<li>NEG OPD</li>
+<li>SUB OPD, OPS</li>
+<li>CMP OPD, OPS</li>
+</ul>
+</blockquote>
+</li>
+<li>乘运算指令<blockquote>
+<ul>
+<li>IMUL OPD, OPS</li>
+<li>IMUL OPD, OPS, n</li>
+<li>IMUL OPS</li>
+<li>MUL OPS</li>
+</ul>
+</blockquote>
+</li>
+<li>符号扩展指令<blockquote>
+<ul>
+<li>CBW<blockquote>
+<p> AL的符号扩展至AH中</p>
+</blockquote>
+</li>
+<li>CWD<blockquote>
+<p> 将AX符号扩展到DX中</p>
+</blockquote>
+</li>
+<li>CWDE<blockquote>
+<p> 将AX中符号扩展至EAX</p>
+</blockquote>
+</li>
+<li>CDQ<blockquote>
+<p> 将EAX中有符号数扩展为EDX、EAX</p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+</li>
+<li>除运算指令<blockquote>
+<ul>
+<li>DIV POS<blockquote>
+<p> 字节除法(AX)/(OPS)-&gt;AL(商),AH(余数)<br> 字节除法(DX,AX)/(OPS)-&gt;AX(商),DX(余数)<br> 字节除法(AX)/(OPS)-&gt;EAX(商),EDX(余数)<br> 除数是0或者运算结果溢出，会产生溢出中断，除法指令不会影响标志寄存器。</p>
+</blockquote>
+</li>
+<li>IDIV OPS<blockquote>
+<p> 字节除法(AX)/(OPS)-&gt;AL(商),AH(余数)<br> 字节除法(DX,AX)/(OPS)-&gt;AX(商),DX(余数)<br> 字节除法(AX)/(OPS)-&gt;EAX(商),EDX(余数)<br> 所得商符号与数学定义相同，余数符号与被除数相同。</p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+<ol start="5">
+<li><strong>位操作指令</strong></li>
+</ol>
+<blockquote>
+<ol>
+<li>逻辑运算指令<blockquote>
+<ul>
+<li>NOT OPD<blockquote>
+<p> 按位取反</p>
+</blockquote>
+</li>
+<li>AND OPD, OPS<blockquote>
+<p> 按位与（逻辑乘）</p>
+</blockquote>
+</li>
+<li>OR OPD, OPS<blockquote>
+<p> 按位或（逻辑加）</p>
+</blockquote>
+</li>
+<li>XOR OPD, OPS<blockquote>
+<p> 按位异或（按位加）</p>
+</blockquote>
+</li>
+<li>TEST OPD, OPS<blockquote>
+<p> 做逻辑乘（按位与）运算，根据结果设置标志位SF,ZF,PF，不改变OPS, OPD的内容</p>
+</blockquote>
+</li>
+<li>BT OPD, OPS<blockquote>
+<p> 取OPD的第OPS位送至CF<br> OPD必须位16/32位的寄存器或存储单元，8位会自动转化为16位。<br> OPS只能是立即数或与OPD同类型的寄存器，不能是存储单元<br> OPS应在-128~255之间，若OPS绝对值大于OPD的位数，取OPS除16或32的余数。</p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+</li>
+<li>移位指令<blockquote>
+<ul>
+<li>SAL OPD, n</li>
+<li>SAR OPD, n</li>
+<li>SHL OPD, n</li>
+<li>SHR OPD, n</li>
+<li>ROL OPD, n</li>
+<li>ROR OPD, n</li>
+<li>RCL OPD, n</li>
+<li>RCR OPD, n</li>
+<li>SHLD OPD, OPS, n</li>
+<li>SHRD OPD, OPS, n</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+<ol start="6">
+<li><strong>串操作指令</strong><blockquote>
+<ul>
+<li>MOVS</li>
+<li>CMPS</li>
+<li>SCAS</li>
+<li>LODS</li>
+<li>STOS</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<h2 id="子程序设计"><a href="#子程序设计" class="headerlink" title="子程序设计"></a>子程序设计</h2><ol>
+<li><p>子程序定义</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. 段内调用的子程序定义</span><br><span class="line">子程序名 PROC NEAR</span><br><span class="line">子程序名 ENDP</span><br><span class="line"></span><br><span class="line">2. 段间调用的子程序定义</span><br><span class="line">子程序名 PROC FAR</span><br><span class="line">子程序名 ENDP</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>子程序调用指令CALL</p>
+<blockquote>
+<ol>
+<li>段内直接调用</li>
+<li>段间直接调用</li>
+<li>段内简介调用</li>
+<li>段间间接调用<br>段内调用：IP压栈<br>段间调用：CS压栈，IP压栈</li>
+</ol>
+</blockquote>
+</li>
+<li><p>返回指令RET<br>CALL和RET均不影响标志位</p>
+</li>
+<li><p>子程序参数传递的方案（注意各方法的优缺点）</p>
+</li>
+</ol>
+<ul>
+<li>寄存器法</li>
+<li>约定单元法</li>
+<li>堆栈法</li>
+</ul>
+
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://taoist-yu.github.io/2019/11/19/80X86汇编语言知识总结/" data-id="ck5jq70ya00005stqotivl391"
+        class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机基础/">计算机基础</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2019/03/20/Forge中关于注册创造模式物品栏的一些理解/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Forge中关于注册创造模式物品栏的一些理解</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+
+  
+  
+<div class="gitalk" id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+<script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '55d85936fbffba6ab2bb',
+    clientSecret: 'c1a65c05f960942f9db21b62949695d7e37853da',
+    repo: 'Taoist-Yu/blogtalk',
+    owner: 'Taoist-Yu',
+    admin: ['Taoist-Yu'],
+    // id: location.pathname,      // Ensure uniqueness and length less than 50
+    id: md5(location.pathname),
+    distractionFreeMode: false,  // Facebook-like distraction free mode
+    pagerDirection: 'last'
+  })
+
+  gitalk.render('gitalk-container')
+</script>
+
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2018-2020
+        宇亓
+      </li>
+      <li>
+        
+          Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <ul class="list-inline">
+  <li>PV:<span id="busuanzi_value_page_pv"></span></li>
+  <li>UV:<span id="busuanzi_value_site_uv"></span></li>
+</ul>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+    <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    
+    <aside class="sidebar">
+      
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/taiji-side.svg" alt="宇亓道院"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">文章</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+      <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+  <script src="/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+			onClick: (e) => {
+      	document.getElementById(e.target.innerText).scrollIntoView()
+      	return false;
+    	}
+    });
+  </script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<script src="/js/ayer.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+
+
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+  
+  
+
+  </div>
+</body>
+
+</html>
